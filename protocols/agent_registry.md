@@ -37,12 +37,32 @@ Jarvis debe consultar este índice primero. Si el dominio necesario no está cub
 
 ## Agentes Planificados (por crear)
 
+### Sprint 3 — Alta/Critica
+
+| Nombre | Dominio | Prioridad | ADN Fuente | Dependencias | Estado |
+|--------|---------|-----------|------------|--------------|--------|
+| `recovery_specialist` | Resiliencia del sistema, backups automaticos SQL, disaster recovery | CRITICA | `VoltAgent/catalog/disaster-recovery.md` | Ninguna | Pendiente Sprint 3 |
+| `mobile_pwa` | Progressive Web App del dashboard — Service Workers, manifest.json, uso offline para Jeff | ALTA | `VoltAgent/catalog/pwa-specialist.md` | `frontend_engineer`, `api_backend` | Pendiente Sprint 3 |
+| `architect_designer` | Planos 2D/3D, normativa NSR-10, diseno arquitectonico Finca Barbosa | ALTA | Construccion Nativa Keystone | `civil_structural_engineer` (dependencia obligatoria Finca Barbosa) | Pendiente Sprint 3 |
+| `civil_structural_engineer` | Calculo de cargas, fundaciones, estructuras de soporte — Deck Finca Barbosa | ALTA | Construccion Nativa Keystone | `architect_designer` (recibe planos) | Pendiente Sprint 3 |
+
+### Sprint 4 — Media/Baja
+
+| Nombre | Dominio | Prioridad | ADN Fuente | Dependencias | Estado |
+|--------|---------|-----------|------------|--------------|--------|
+| `performance_engineer` | Optimizacion de latencia OCR, profiling FastAPI, carga frontend | MEDIA | `VoltAgent/catalog/performance-optimizer.md` | `api_backend`, `python_developer` | Pendiente Sprint 4 |
+| `fluids_hvac_engineer` | Redes hidrosanitarias, drenajes de finca, calculo de presiones | MEDIA | Construccion Nativa Keystone | `civil_structural_engineer` | Pendiente Sprint 4 |
+| `mechanical_engineer` | Automatizacion piezas moviles, estructuras metalicas complejas | MEDIA | Construccion Nativa Keystone | `civil_structural_engineer` | Pendiente Sprint 4 |
+| `localization_expert` | Gestion bilingue (ES/EN), conversion de unidades COP/USD, Pies/Metros | BAJA | `VoltAgent/catalog/localization-specialist.md` | Ninguna | Pendiente Sprint 4 |
+
+### Legado (definidos antes del backlog formal)
+
 | Nombre | Dominio | Estado |
 |--------|---------|--------|
 | `inventario` | Inventario Finca Barbosa | Pendiente |
-| `rrhh` | Evaluación CVs, framework Keyser v4 | Pendiente |
-| `investigador` | Research autónomo (web, papers) | Pendiente |
-| `seguridad` | Validación contenido externo, anti-inyección | Pendiente |
+| `rrhh` | Evaluacion CVs, framework Keyser v4 | Pendiente |
+| `investigador` | Research autonomo (web, papers) | Pendiente |
+| `seguridad` | Validacion contenido externo, anti-inyeccion | Pendiente |
 | `whatsapp` | Daemon WhatsApp +57 310 338 4459 | Pendiente |
 
 ---

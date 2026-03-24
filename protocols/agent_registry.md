@@ -48,6 +48,24 @@ Jarvis debe consultar este índice primero. Si el dominio necesario no está cub
 |--------|---------|-----------|------------|--------------|--------|
 | `reinforcement_learning_engineer` | RL para optimizacion de estimaciones — reward/state/action sobre margen de error en licitaciones | FUTURA | `VoltAgent/awesome-claude-code-subagents/categories/05-data-ai/reinforcement-learning-engineer.md` | `data_scientist`, `estimation_specialist` | ADN extraido — Pendiente activacion |
 
+### Reserva Tecnica — Bloque 1: Importacion Quirurgica Programada
+
+| Nombre | Dominio | Meta Thomas | ADN Fuente | Dependencias | Estado |
+|--------|---------|-------------|------------|--------------|--------|
+| `documentation_engineer` | Transformar cada Sprint en Case Study profesional — portafolio senior, changelogs narrativos, documentacion de arquitectura | CV senior Thomas | `VoltAgent/awesome-claude-code-subagents/categories/03-development/documentation-engineer.md` | `tech_writer` (complementa, no reemplaza) | Pendiente activacion |
+| `security_engineer` | Defensas activas, auditoria de vulnerabilidades, cifrado E2E en Caja Negra — complementa `security_auditor` con capacidad de implementacion | Especializacion ciberseguridad Thomas | `VoltAgent/awesome-claude-code-subagents/categories/03-development/security-engineer.md` | `security_auditor` (audita), `python_developer` (implementa fixes) | Pendiente activacion |
+| `mlops_engineer` | Orquestar ciclo de vida de modelos RL — model versioning, drift detection, reentrenamiento automatico, serving en produccion | Infraestructura IA a gran escala Thomas | `VoltAgent/awesome-claude-code-subagents/categories/05-data-ai/mlops-engineer.md` | `reinforcement_learning_engineer` (DEPENDENCIA CRITICA — MLOps no tiene sentido sin el modelo RL activo) | BLOQUEADO hasta activacion RL Engineer |
+| `academic_researcher` | Asistente de investigacion avanzada — papers, tesis, entregas EAFIT, revision bibliografica, metodologia academica | Exito curriculo Ingenieria Sistemas EAFIT | `VoltAgent/awesome-claude-code-subagents/categories/01-general/academic-researcher.md` | Ninguna (opera independiente) | Pendiente activacion |
+
+### Arquitectura de Sistema — Bloque 2: JARVIS-CORE-ULTRA
+
+| ID | Tarea | Descripcion | Dependencias | Estado |
+|----|-------|-------------|--------------|--------|
+| META-001 | Long-Term Context Memory | Sistema de persistencia para que Jarvis mantenga contexto de decisiones de negocio de Jeff meses atras | `database_architect` (diseno de schema), `ai_engineer` (arquitectura RAG) | Pendiente — requiere decision de stack (vector DB vs files) |
+| META-002 | Internal Self-Reflection Loop | Paso de Critica Interna donde Jarvis valida calidad tecnica del output de un subagente antes de entregar al usuario | `qc` (referencia de criterios), `ai_engineer` (Amendment Pipeline) | Pendiente — requiere definir umbral de calidad |
+| META-003 | Cross-Agent Knowledge Transfer | Protocolo para que el aprendizaje de un agente (compliance: leyes DIAN) se comparta automaticamente con otros (estimation_specialist) | `ai_engineer`, `tech_writer` (actualiza KBs) | Pendiente — `keystone_kb.md` es el precursor manual de este sistema |
+| META-004 | Multi-Modal Routing Prep | Arquitectura para procesar entradas de audio (notas de voz de Jeff) y fotos de obra sin perder coherencia de contexto | `api_backend` (endpoints multimodal), `python_developer` (transcripcion audio) | Pendiente — requiere Claude multimodal + Whisper/Deepgram para audio |
+
 ### Sprint 3 — Alta/Critica
 
 | Nombre | Dominio | Prioridad | ADN Fuente | Dependencias | Estado |

@@ -1,0 +1,42 @@
+# ── Datos sensibles ───────────────────────────────────────
+brief.md
+.env
+*.env
+# .env.example SÍ se commitea — es la plantilla sin valores reales
+*_token.json
+*client_secret*.json
+
+# ── Archivos propietarios AMUCO (no subir) ───────────────
+chatbot/fichas_tecnicas/
+chatbot/product_catalog.json
+
+# ── Base de datos vectorial (se regenera) ────────────────
+chatbot/chroma_db/
+
+# ── Python ────────────────────────────────────────────────
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+env/
+
+# ── VSCode ────────────────────────────────────────────────
+# (mantenemos .vscode/ para compartir config del proyecto)
+
+# ── OS ────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Word temporal ─────────────────────────────────────────
+~$*.docx
+~$*.xlsx
+
+# ── Logs operativos (se generan en runtime) ───────────────
+reminder_agent/sent_log.json

@@ -5,6 +5,7 @@
 *secret*.json
 *credentials*.json
 *auth*.json
+*key*.json
 # Gmail OAuth — explicit paths
 agentes/email_manager/tools/jarvis_token.json
 agentes/email_manager/tools/client_secret*.json

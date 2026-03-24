@@ -22,6 +22,7 @@ jarvis-ksg/
         ├── global_config.json           ← Estandares Keystone, TRM vigente, protocolos — COMMITTED
         ├── user_preferences.md          ← Perfil Thomas, estilo de comunicacion — COMMITTED
         ├── agent_performance.json       ← Latencias y metricas de agentes — GITIGNORED (runtime)
+        ├── shared_knowledge.json        ← Cerebro Colectivo META-003 — GITIGNORED (runtime)
         └── session_state.json           ← Estado de la sesion activa — GITIGNORED (efimero)
 
 docs/
@@ -121,6 +122,8 @@ PASO 2 — Contexto del Director [SIEMPRE]
 PASO 3 — Estado del Enjambre [SIEMPRE]
   └─ Leer core/memory/global_config.json → TRM vigente, modelo activo, estandares
   └─ Leer protocols/agent_registry.md → que agentes existen y su estado
+  └─ Leer core/memory/shared_knowledge.json (si existe) → inyectar entradas ACTIVE
+     con severity CRITICA/ALTA como Reglas Temporales de Sesion para sus affected_agents
 
 PASO 4 — Estado del Trabajo [SI HAY SESION PREVIA]
   └─ Leer session_handoff.md (si existe) → tarea en curso, contexto de continuacion

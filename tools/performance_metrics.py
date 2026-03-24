@@ -1,13 +1,16 @@
 #!/usr/bin/env python3
 """
 Module: performance_metrics.py
-Purpose: META-002 v3 Observability — lee agent_performance.json y calcula
-         metricas del bucle de reflexion, filtration rate, y swarm error funnel.
+Purpose: META-002 v3 Observability + META-003 Knowledge Transfer —
+         lee agent_performance.json, calcula metricas del bucle de reflexion,
+         y sincroniza patrones aprendidos en shared_knowledge.json.
 Usage:
-  python tools/performance_metrics.py                  # imprime reporte a stdout
-  python tools/performance_metrics.py --json           # output JSON crudo
-  python tools/performance_metrics.py --report         # genera docs/reports/swarm_health_v1.md
-  python tools/performance_metrics.py --agent python_developer  # metricas de un agente
+  python tools/performance_metrics.py                        # reporte a stdout
+  python tools/performance_metrics.py --json                 # output JSON crudo
+  python tools/performance_metrics.py --report               # genera swarm_health_v1.md
+  python tools/performance_metrics.py --agent python_developer
+  python tools/performance_metrics.py --sync-knowledge       # META-003: sincroniza patrones
+  python tools/performance_metrics.py --knowledge            # muestra cerebro colectivo
 Dependencies: stdlib only (json, pathlib, datetime, argparse)
 """
 
@@ -28,6 +31,7 @@ logger = logging.getLogger(__name__)
 # Rutas relativas a la raiz del repo
 REPO_ROOT = Path(__file__).parent.parent
 PERF_FILE = REPO_ROOT / "core" / "memory" / "agent_performance.json"
+KNOWLEDGE_FILE = REPO_ROOT / "core" / "memory" / "shared_knowledge.json"
 REPORT_FILE = REPO_ROOT / "docs" / "reports" / "swarm_health_v1.md"
 
 LENTE_LABELS = {
@@ -272,9 +276,172 @@ def build_markdown_report(data: dict[str, Any]) -> str:
         f"",
         f"---",
         f"",
-        f"*Generado por: `tools/performance_metrics.py` | META-002 v3 | Keystone KSG*",
     ]
 
+    # Section 6 — META-003 Cerebro Colectivo
+    kb = load_shared_knowledge()
+    lines.append(format_knowledge_report(kb))
+    lines += [
+        f"",
+        f"---",
+        f"",
+        f"*Generado por: `tools/performance_metrics.py` | META-002 v3 + META-003 | Keystone KSG*",
+    ]
+
+    return "\n".join(lines)
+
+
+# ── META-003 Knowledge Transfer ───────────────────────────────────────────────
+
+def load_shared_knowledge() -> dict[str, Any]:
+    if not KNOWLEDGE_FILE.exists():
+        return {
+            "schema_version": "1.0",
+            "last_updated": datetime.now(timezone.utc).isoformat(),
+            "nota": "GITIGNORED — Cerebro Colectivo del enjambre.",
+            "stats": {"total_entries": 0, "active_entries": 0,
+                      "entries_by_lente": {"PERF-001": 0, "SEC-001": 0, "PR-001": 0}},
+            "entries": []
+        }
+    with open(KNOWLEDGE_FILE, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def save_shared_knowledge(kb: dict[str, Any]) -> None:
+    active = [e for e in kb["entries"] if e.get("status") == "ACTIVE"]
+    by_lente: dict[str, int] = {"PERF-001": 0, "SEC-001": 0, "PR-001": 0}
+    for e in active:
+        lente = e.get("lente", "")
+        if lente in by_lente:
+            by_lente[lente] += 1
+    kb["stats"] = {
+        "total_entries": len(kb["entries"]),
+        "active_entries": len(active),
+        "entries_by_lente": by_lente,
+    }
+    kb["last_updated"] = datetime.now(timezone.utc).isoformat()
+    KNOWLEDGE_FILE.parent.mkdir(parents=True, exist_ok=True)
+    with open(KNOWLEDGE_FILE, "w", encoding="utf-8") as f:
+        json.dump(kb, f, indent=2, ensure_ascii=False)
+    logger.info("shared_knowledge.json actualizado — %d entradas activas", len(active))
+
+
+def register_knowledge_entry(
+    kb: dict[str, Any],
+    pattern: str,
+    prevention_rule: str,
+    affected_agents: list[str],
+    lente: str,
+    severity: str,
+    source_agent: str,
+    source_ticket: str | None = None,
+    reference: str = "",
+) -> str:
+    """Crea una nueva entrada o incrementa confirmed_count si el pattern ya existe."""
+    now = datetime.now(timezone.utc).isoformat()
+    # Deduplication — buscar por pattern exacto (case-insensitive)
+    for entry in kb["entries"]:
+        if entry.get("pattern", "").lower() == pattern.lower():
+            entry["confirmed_count"] = entry.get("confirmed_count", 1) + 1
+            entry["last_confirmed"] = now
+            entry["updated_at"] = now
+            logger.info("Patron conocido confirmado: %s (x%d)", entry["id"], entry["confirmed_count"])
+            return entry["id"]
+    # Nueva entrada
+    existing_ids = [e["id"] for e in kb["entries"]]
+    n = len(existing_ids) + 1
+    new_id = f"KN-{n:03d}"
+    while new_id in existing_ids:
+        n += 1
+        new_id = f"KN-{n:03d}"
+    entry = {
+        "id": new_id,
+        "created_at": now,
+        "updated_at": now,
+        "source_agent": source_agent,
+        "lente": lente,
+        "severity": severity,
+        "pattern": pattern,
+        "prevention_rule": prevention_rule,
+        "affected_agents": affected_agents,
+        "confirmed_count": 1,
+        "last_confirmed": now,
+        "status": "ACTIVE",
+        "source_ticket": source_ticket,
+        "reference": reference,
+    }
+    kb["entries"].append(entry)
+    logger.info("Nuevo patron registrado en cerebro colectivo: %s — %s", new_id, pattern)
+    return new_id
+
+
+def sync_knowledge_from_tickets(perf_data: dict[str, Any]) -> tuple[int, int]:
+    """
+    Lee reflection_metrics de agent_performance.json.
+    Por cada ticket resuelto internamente que tenga detalle, genera entrada en shared_knowledge.
+    Retorna (nuevas_entradas, confirmaciones).
+    """
+    kb = load_shared_knowledge()
+    new_count = 0
+    confirm_count = 0
+    agents = perf_data.get("agents", {})
+
+    for agent_name, agent_data in agents.items():
+        rm = agent_data.get("reflection_metrics")
+        if not rm or rm.get("tickets_resolved_internally", 0) == 0:
+            continue
+        # Los tickets resueltos tienen detalle en last_ticket_id si el agente lo registro
+        ticket_id = rm.get("last_ticket_id")
+        if not ticket_id:
+            continue
+        by_lente = rm.get("tickets_by_lente", {})
+        # Generar una entrada de conocimiento por lente que tuvo tickets resueltos
+        for lente, count in by_lente.items():
+            if count == 0:
+                continue
+            pattern = f"[Auto-detectado] {lente} violation en {agent_name}"
+            prevention_rule = f"Ver docs/architecture/{'sec-001-standards.md' if lente == 'SEC-001' else 'meta-002-reflection.md'} — criterios {lente}"
+            entry_id = register_knowledge_entry(
+                kb=kb,
+                pattern=pattern,
+                prevention_rule=prevention_rule,
+                affected_agents=[agent_name],
+                lente=lente,
+                severity="ALTA",
+                source_agent=agent_name,
+                source_ticket=ticket_id,
+            )
+            if entry_id.startswith("KN-") and any(
+                e["id"] == entry_id and e["confirmed_count"] == 1 for e in kb["entries"]
+            ):
+                new_count += 1
+            else:
+                confirm_count += 1
+
+    if new_count > 0 or confirm_count > 0:
+        save_shared_knowledge(kb)
+    return new_count, confirm_count
+
+
+def format_knowledge_report(kb: dict[str, Any]) -> str:
+    entries = [e for e in kb["entries"] if e.get("status") == "ACTIVE"]
+    stats = kb.get("stats", {})
+    lines = [
+        f"## Cerebro Colectivo — shared_knowledge.json",
+        f"**Entradas activas:** {stats.get('active_entries', 0)} | "
+        f"**Actualizado:** {kb.get('last_updated', '—')[:10]}",
+        f"",
+        f"| ID | Lente | Severidad | Pattern | Agentes afectados | Confirmaciones |",
+        f"|----|-------|-----------|---------|------------------|----------------|",
+    ]
+    for e in sorted(entries, key=lambda x: x.get("confirmed_count", 0), reverse=True):
+        agents_str = ", ".join(f"`{a}`" for a in e.get("affected_agents", [])[:3])
+        if len(e.get("affected_agents", [])) > 3:
+            agents_str += "..."
+        lines.append(
+            f"| `{e['id']}` | `{e['lente']}` | {e['severity']} | "
+            f"{e['pattern'][:50]} | {agents_str} | {e.get('confirmed_count', 1)} |"
+        )
     return "\n".join(lines)
 
 
@@ -295,15 +462,31 @@ def build_json_report(data: dict[str, Any]) -> dict[str, Any]:
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="META-002 v3 — Metricas de salud del enjambre Keystone KSG"
+        description="META-002 v3 + META-003 — Metricas y conocimiento compartido del enjambre"
     )
     parser.add_argument("--json", action="store_true", help="Output JSON crudo")
     parser.add_argument("--report", action="store_true", help="Escribe docs/reports/swarm_health_v1.md")
     parser.add_argument("--agent", type=str, help="Metricas de un agente especifico")
+    parser.add_argument("--sync-knowledge", action="store_true",
+                        help="META-003: sincroniza tickets resueltos -> shared_knowledge.json")
+    parser.add_argument("--knowledge", action="store_true",
+                        help="Muestra el estado del cerebro colectivo (shared_knowledge.json)")
     args = parser.parse_args()
 
     data = load_performance_data()
     agents = data.get("agents", {})
+
+    if args.sync_knowledge:
+        new_c, confirm_c = sync_knowledge_from_tickets(data)
+        print(f"META-003 sync completado: {new_c} nuevas entradas, {confirm_c} confirmaciones.")
+        kb = load_shared_knowledge()
+        print(format_knowledge_report(kb))
+        return
+
+    if args.knowledge:
+        kb = load_shared_knowledge()
+        print(format_knowledge_report(kb))
+        return
 
     if args.agent:
         agent_data = agents.get(args.agent)

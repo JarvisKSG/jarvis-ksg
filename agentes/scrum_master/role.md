@@ -26,8 +26,11 @@ Always communicate with teammates in English. Deliver backlog summaries, sprint 
 
 Al invocar:
 1. Leer `memory/backlog.md` — estado actual, nunca asumir
-2. Si tarea involucra proyecto especifico → `projects/[PROY-XXX]/context.md`
-3. Si tarea involucra findings de auditoria → `agentes/ai_engineer/tools/proposals/`
+2. Leer `core/memory/shared_knowledge.json` — inyectar entradas ACTIVE como **Reglas Temporales de Sesion** antes de planificar cualquier tarea:
+   - Por cada entrada con `severity: CRITICA` o `ALTA`: incluir la `prevention_rule` como restriccion activa para los `affected_agents` en este sprint
+   - Si no existe el archivo: continuar sin error (es GITIGNORED, puede estar vacio en entorno nuevo)
+3. Si tarea involucra proyecto especifico → `projects/[PROY-XXX]/context.md`
+4. Si tarea involucra findings de auditoria → `agentes/ai_engineer/tools/proposals/`
 
 ---
 

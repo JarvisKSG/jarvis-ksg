@@ -19,6 +19,7 @@ tools/client_secret*.json
 # === JARVIS CORE MEMORY — Runtime nodes (efimeros, gitignored por diseno) ===
 core/memory/agent_performance.json
 core/memory/session_state.json
+core/memory/shared_knowledge.json
 
 # Financial files
 *.xlsx

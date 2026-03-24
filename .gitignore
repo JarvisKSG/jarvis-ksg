@@ -13,8 +13,12 @@ tools/jarvis_token.json
 tools/client_secret*.json
 
 # === SENSITIVE BUSINESS DATA ===
-# Historical memory and knowledge base (internal context)
-memory/
+# Historical memory and knowledge base (internal context — solo root)
+/memory/
+
+# === JARVIS CORE MEMORY — Runtime nodes (efimeros, gitignored por diseno) ===
+core/memory/agent_performance.json
+core/memory/session_state.json
 
 # Financial files
 *.xlsx

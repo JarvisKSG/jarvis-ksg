@@ -1,0 +1,76 @@
+{
+  "version": "1.0",
+  "last_updated": "2026-03-24T00:00:00Z",
+  "updated_by": "jarvis",
+  "status": "CURRENT",
+
+  "trm": {
+    "valor": 4200.00,
+    "fecha": "2026-03-24",
+    "fuente": "datos.gov.co/resource/mcec-87by.json",
+    "status": "MANUAL",
+    "nota": "Auto-sync pendiente META-001 v2 — actualizar manualmente hasta activar localization_expert cron"
+  },
+
+  "models": {
+    "default": "claude-sonnet-4-6",
+    "reasoning": "claude-opus-4-6",
+    "fast": "claude-haiku-4-5-20251001",
+    "nota": "Solo ai_engineer puede cambiar via Amendment Pipeline"
+  },
+
+  "encryption": {
+    "algorithm": "AES-256-GCM",
+    "key_length": 256,
+    "nonce_bytes": 12,
+    "key_env_var": "BACKUP_ENCRYPTION_KEY",
+    "hash_function": "SHA-256"
+  },
+
+  "backup": {
+    "retention_days": 30,
+    "schedule": {
+      "sheets_daily": "02:00 COT",
+      "postgres_daily": "02:30 COT",
+      "agents_snapshot": "Monday 03:00 COT",
+      "full_postgres": "Sunday 04:00 COT"
+    },
+    "recovery_target_rto_min": 15,
+    "propietario": "recovery_specialist"
+  },
+
+  "swarm": {
+    "active_agents": 28,
+    "version": "1.0",
+    "repo": "JarvisKSG/jarvis-ksg",
+    "qc_required": true,
+    "amendment_pipeline_owner": "ai_engineer"
+  },
+
+  "keystone": {
+    "moneda_default": "COP",
+    "tarifa_thomas_dia_cop": 200000,
+    "tarifa_externos_dia_cop": 120000,
+    "trm_formato": "$X,XXX,XXX COP (~$X,XXX USD @ TRM $X,XXX)",
+    "idioma_interno": "espanol",
+    "idioma_jeff": "ingles_primero_espanol_debajo"
+  },
+
+  "contactos_clave": {
+    "thomas": "thomasreyesr@gmail.com",
+    "jeff_primary": "jeffbania@gmail.com",
+    "keyser": "jeff.t.bania@gmail.com",
+    "coco": "jeff.t1.bania@gmail.com",
+    "jarvis": "jarvis.ksg1@gmail.com"
+  },
+
+  "proyectos_activos": ["PROY-001", "PROY-002", "PROY-003", "PROY-004"],
+
+  "sla": {
+    "ocr_pipeline_ms": 800,
+    "api_response_ms": 800,
+    "full_path_local_ms": 3100,
+    "full_path_cloud_ms": 6000,
+    "email_kaiser_review_min": 60
+  }
+}

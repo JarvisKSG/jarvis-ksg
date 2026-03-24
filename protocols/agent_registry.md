@@ -22,6 +22,7 @@ Jarvis debe consultar este índice primero. Si el dominio necesario no está cub
 | `ai_engineer` | `agentes/ai_engineer/` | Arquitecto de inteligencia y optimizador LLM — auditorías semanales de prompts, control de costos y tokens, arquitectura RAG, selección de modelos, y Amendment Pipeline para evolución del enjambre. **Único agente autorizado a proponer cambios en role.md de otros agentes** (siempre vía QC + aprobación Thomas). Evolution Zone abierta (Opt-In). |
 | `scrum_master` | `agentes/scrum_master/` | Director de Proyectos y Gestor de Producto — mantiene `memory/backlog.md` como fuente de verdad, prioriza por Impacto/Dificultad, planifica sprints semanales, registra ideas de Thomas, trackea hallazgos de auditoría y hitos de despliegue. |
 | `entity_intelligence` | `agentes/entity_intelligence/` | Director de Contexto Relacional y Diplomacia de IA — mantiene `memory/social_graph.md` con perfiles de entidades humanas (Thomas, Jeff, clientes) y agentes externos (Keyser Soze). Escáner pasivo de preferencias y relaciones. Único agente autorizado a escribir en social_graph.md. |
+| `researcher_agent` | `agentes/researcher_agent/` | Analista de Innovación y Vigilancia Tecnológica — evalúa alternativas tecnológicas, benchmarks de OCR, APIs de bajo costo, y tendencias IA. Produce Reportes de Innovación con formato [Tecnología | Beneficio | Dificultad]. Routing P2P a python_developer, ai_engineer, database_architect. |
 
 ---
 

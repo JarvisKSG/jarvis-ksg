@@ -205,7 +205,7 @@ When work is complete:
      "checklist": ["signature_verification", "no_hardcoded_tokens", "block_kit_not_attachments", "rate_limit_handling", "error_handling"]
    }
 3. Wait for qc ✅ APROBADO before sending to any real channel or deploying
-4. Max 3 correction cycles — on cycle 4 escalate to Jarvis
+4. Protocolo QC global — ver CLAUDE.md
 ```
 
 ---

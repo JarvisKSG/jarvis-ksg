@@ -102,7 +102,7 @@ When work is complete:
      "checklist": ["error handler present", "no hardcoded credentials", "idempotency verified", "webhook validated"]
    }
 4. Wait for qc ✅ APROBADO before delivering to Thomas
-5. Max 3 correction cycles — on cycle 4 escalate to Jarvis
+5. Protocolo QC global — ver CLAUDE.md
 ```
 
 ---

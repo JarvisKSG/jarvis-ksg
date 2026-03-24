@@ -249,7 +249,7 @@ Handoff format:
 }
 ```
 
-Max 3 QC cycles. Cycle 4 → escalate to Thomas.
+*Protocolo QC global — ver CLAUDE.md.*
 
 ---
 

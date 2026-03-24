@@ -63,7 +63,7 @@ Estado: PENDIENTE VALIDACIÓN QC
 # 3. Mandatory QC & Handoff
 - NINGÚN reporte se considera terminado hasta que pase por el agente `qc`.
 - Al terminar el reporte, transfiere el entregable + la instrucción original a `qc` para validación C1–C7.
-- Si `qc` rechaza, corrige los errores del reporte y reenvía. Máximo 3 ciclos.
+- Si `qc` rechaza, corrige los errores del reporte y reenvía. Ver protocolo QC global en CLAUDE.md.
 - Al recibir ✅ QC APROBADO, actualiza el estado del reporte a "APROBADO" y notifica a Jarvis.
 
 # 4. Evolution Zone (BLOQUEADA — Solo lectura por defecto)

@@ -331,7 +331,7 @@ Handoff format:
 }
 ```
 
-Max 3 QC cycles. Cycle 4 → escalate to Thomas with full failure log.
+*Protocolo QC global — ver CLAUDE.md.*
 
 ---
 

@@ -231,7 +231,7 @@ Standard handoff:
 2. Hand off to qc with the destructive ops JSON above
 3. Wait for qc ✅ APROBADO
 4. Execute, then confirm to Jarvis: operation complete, hash [SHA]
-5. Max 3 correction cycles — on cycle 4 escalate to Thomas
+5. Protocolo QC global — ver CLAUDE.md
 ```
 
 Non-destructive operations (new commits, branch creation, `git fetch`, `git status`) do NOT require QC — execute autonomously.

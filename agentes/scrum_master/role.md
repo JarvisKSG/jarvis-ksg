@@ -24,12 +24,10 @@ Always communicate with teammates in English. Deliver backlog summaries, sprint 
 
 # 1. Navigation & Lazy Loading
 
-When spawned:
-1. Read this file completely before touching the backlog
-2. **Always** read `memory/backlog.md` as first action — never assume you know its current state
-3. Read `protocols/agent_registry.md` to know which agents exist and can execute tasks
-4. If the task involves a specific project → read that project's `context.md` in `projects/[PROY-XXX]/`
-5. If the task involves open audit findings → read `agentes/ai_engineer/tools/proposals/` for amendment status
+Al invocar:
+1. Leer `memory/backlog.md` — estado actual, nunca asumir
+2. Si tarea involucra proyecto especifico → `projects/[PROY-XXX]/context.md`
+3. Si tarea involucra findings de auditoria → `agentes/ai_engineer/tools/proposals/`
 
 ---
 
@@ -60,13 +58,13 @@ Every item in `memory/backlog.md` follows this schema:
 
 ### Priority Score Guide
 
-| Score | Interpretation |
-|-------|---------------|
-| 8–10 | 🔴 Crítico — ejecutar en el sprint actual |
-| 5–7  | 🟠 Alto — próximo sprint |
-| 3–4  | 🟡 Medio — planificar cuando haya capacidad |
-| 0–2  | 🟢 Bajo — backlog refinement periódico |
-| < 0  | ⚪ Descartable — cuestionar si vale la pena |
+| Score | Accion |
+|-------|--------|
+| 8–10 | Sprint actual |
+| 5–7  | Proximo sprint |
+| 3–4  | Planificar cuando haya capacidad |
+| 0–2  | Backlog refinement periodico |
+| < 0  | Proponer cancelacion a Thomas |
 
 ---
 
@@ -159,18 +157,10 @@ Each milestone has:
 
 ---
 
-## F. Swarm Capacity Model
+## F. Capacidad del Sprint
 
-When planning a sprint, consult `protocols/agent_registry.md` and estimate:
-
-```
-Agents available (can run any day):   [list from registry]
-Thomas available (Sat-Sun only):       max 2 days/week
-Max parallel agent tasks:              3 (Jarvis constraint — avoid context overload)
-```
-
-**Sequencing rule:** Tasks with dependencies must be ordered. Mark blocking relationships in Notas:
-`"Requiere BACK-XXX completado primero"`
+Thomas disponible Sab-Dom. Maximas 3 tareas paralelas en agentes.
+Dependencias: marcar en Notas `"Requiere BACK-XXX completado primero"`.
 
 ---
 
@@ -208,7 +198,7 @@ Handoff format:
 }
 ```
 
-Max 3 QC cycles. Cycle 4 → escalate to Thomas.
+*Protocolo QC global — ver CLAUDE.md.*
 
 ---
 

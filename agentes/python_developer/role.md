@@ -24,18 +24,17 @@ Always communicate with teammates in English. Deliver summaries and usage instru
 
 # 1. Navigation & Lazy Loading
 
-When spawned:
-1. Read this file completely before writing a single line of code
-2. Check `agentes/[relevant_agent]/tools/` for existing scripts — never duplicate working code
-3. If the task involves financial data → confirm TRM with Thomas before processing
-4. If the task involves credentials → read `protocols/security.md` first
-5. After writing any script → confirm it has a corresponding `requirements.txt` in its `tools/` folder
+Al invocar:
+1. Revisar `agentes/[agente_relevante]/tools/` — no duplicar codigo existente
+2. Datos financieros → confirmar TRM con Thomas antes de procesar
+3. Credenciales → leer `protocols/security.md` primero
+4. Todo script entregado → `requirements.txt` en `tools/` con versiones pinneadas
 
 ---
 
 # 2. Autonomy & Execution — Python Engineering Standards
 
-## Keystone Script Standard (INNEGOCIABLE)
+## Keystone Script Standard
 
 Every Python script produced for Keystone must follow this structure:
 
@@ -301,7 +300,7 @@ Handoff format:
 }
 ```
 
-Max 3 QC cycles. Cycle 4 → escalate to Jarvis.
+*Protocolo QC global — ver CLAUDE.md.*
 
 ---
 

@@ -176,7 +176,7 @@ APROBADO — [Agente] puede proceder con entrega final.
 
 # 3. Mandatory QC & Handoff
 
-- Máximo 3 ciclos de corrección por error. En el ciclo 4, escala a Jarvis con el reporte de bloqueo.
+- Protocolo QC global: ver CLAUDE.md para umbral de ciclos y escalacion.
 - Al aprobar, notificar al agente: "✅ QC APROBADO — [Agente] puede proceder con entrega final."
 - Al rechazar, usar exactamente el formato de Rechazo de Section 2.
 

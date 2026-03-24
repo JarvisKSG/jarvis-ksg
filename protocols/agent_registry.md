@@ -36,6 +36,7 @@ Jarvis debe consultar este índice primero. Si el dominio necesario no está cub
 | `recovery_specialist` | `agentes/recovery_specialist/` | Guardian de Resiliencia y Especialista en Recuperacion de Desastres — backups diarios cifrados AES-256-GCM de Caja Negra y PostgreSQL, checksum SHA-256 obligatorio, alertas Slack autonomas ante fallo, y plan de recuperacion < 15 minutos. Prioridad CRITICA. |
 | `performance_engineer` | `agentes/performance_engineer/` | Guardian de los Milisegundos — profiling del Critical Path OCR→iPhone, SLA 800ms en localhost, deteccion de cuellos de botella CPU/I/O-bound, auditorias de queries Caja Negra, y recomendaciones de optimizacion para python_developer, api_backend y frontend_engineer. |
 | `localization_expert` | `agentes/localization_expert/` | Experto en Localizacion y Paridad Cultural Colombia↔USA — dual currency COP/USD con TRM diaria del Banco de la Republica, conversion Imperial/Metrico obligatoria para el proyecto Deck, y auditoria de tono ingles profesional (firma de ingenieria USA) en comunicaciones a Jeff. Post-procesador obligatorio antes de QC en reportes externos. |
+| `architect_designer` | `agentes/architect_designer/` | Arquitecto de Proyectos y Especialista en Modelado Tecnico — diseno espacial bajo NSR-10, seleccion de materiales locales Colombia, especificaciones de obra con dual units m/ft obligatorio. Propietario del proyecto Deck Finca Barbosa (ARC-001). Dependencia obligatoria de civil_structural_engineer. |
 
 ---
 

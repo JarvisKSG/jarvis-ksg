@@ -39,6 +39,7 @@ Jarvis debe consultar este índice primero. Si el dominio necesario no está cub
 | `architect_designer` | `agentes/architect_designer/` | Arquitecto de Proyectos y Especialista en Modelado Tecnico — diseno espacial bajo NSR-10, seleccion de materiales locales Colombia, especificaciones de obra con dual units m/ft obligatorio. Propietario del proyecto Deck Finca Barbosa (ARC-001). Dependencia obligatoria de civil_structural_engineer. |
 | `academic_researcher` | `agentes/academic_researcher/` | Principal Investigador y Tutor Academico — asistente de investigacion rigurosa para EAFIT Ingenieria de Sistemas, sintesis de papers con 3+ fuentes primarias obligatorias, Knowledge Bridge Keystone↔curriculo EAFIT, y reformulacion de experiencia practica como logros academicos para CV senior de Thomas. Socio principal del documentation_engineer (pendiente). |
 | `prompt_engineer` | `agentes/prompt_engineer/` | Optimizador de Lenguaje del Enjambre — audita y refactoriza los role.md de los 28 agentes para eliminar verbosidad, ambiguedad y tokens redundantes. Regla de Oro: Claridad > Cortesia. Pre-procesador de Sprint 4 y nuevas activaciones. Vinculado a PERF-001 como palanca de reduccion de latencia. |
+| `security_engineer` | `agentes/security_engineer/` | Defensor Activo del Enjambre — implementa defensas activas y cifrado E2E donde `security_auditor` solo audita. Propietario de `docs/architecture/sec-001-standards.md`. Verdad de Seguridad para META-002 Lente 2. Complementa al security_auditor: auditor detecta, security_engineer implementa. |
 
 ---
 

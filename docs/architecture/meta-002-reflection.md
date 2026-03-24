@@ -62,7 +62,7 @@ SÍ               NO
 ### Lente 2 — SEC-001: Seguridad
 
 **Fuente de criterios:** `agentes/security_auditor/role.md` (secciones 2A–2E)
-**Nota:** SEC-001 formal pendiente de formalización como documento `docs/architecture/sec-001-standards.md`. Hasta que exista, los criterios se derivan directamente del role.md del `security_auditor`.
+**Fuente de criterios:** `docs/architecture/sec-001-standards.md` — ACTIVO desde 2026-03-24.
 **Agentes que lo aplican obligatoriamente:** `python_developer`, `api_backend`, `n8n_engineer`, `email_manager`
 
 | Criterio | Verificación | Severidad |
@@ -206,7 +206,7 @@ Util para auditorias retroactivas de codigo ya en produccion.
 | META-001 v1 (memoria estable) | ACTIVO | Si |
 | PERF-001 criterios (`diagnostico_v1.md`) | ACTIVO | Si |
 | PR-001 criterios (`refactor_v1.md`) | ACTIVO | Si |
-| SEC-001 formalizado (`sec-001-standards.md`) | PENDIENTE | Parcial — usar `security_auditor/role.md` hasta que exista |
+| SEC-001 formalizado (`sec-001-standards.md`) | **ACTIVO** | Desbloqueado — `security_engineer` activado 2026-03-24 |
 | `agent_performance.json` con `reflection_metrics` | PENDIENTE | Si — requiere schema update |
 
 ### Roadmap META-002 → META-003
@@ -214,7 +214,7 @@ Util para auditorias retroactivas de codigo ya en produccion.
 | Fase | Descripcion | Estado |
 |------|-------------|--------|
 | META-002 v1 (hoy) | Protocolo definido, activacion manual por Jarvis, Internal Ticket manual | EN DESARROLLO |
-| META-002 v2 | Instruccion integrada en role.md de 5 agentes criticos (python_developer, api_backend, frontend_engineer, email_manager, n8n_engineer) | Pendiente schema update |
+| META-002 v2 | Instruccion integrada en role.md de 5 agentes criticos (python_developer, api_backend, frontend_engineer, email_manager, n8n_engineer) | **DESBLOQUEADO** — SEC-001 activo, Amendment Pipeline listo |
 | META-002 v3 | `reflection_metrics` en `agent_performance.json` para todos los agentes — dashboard de filtration rate | Pendiente META-003 |
 | META-003 | Los tickets resueltos internamente alimentan `shared_knowledge.json` — el aprendizaje de un agente se comparte automaticamente | Pendiente META-002 v2 estable |
 

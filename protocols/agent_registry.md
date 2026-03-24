@@ -27,6 +27,9 @@ Jarvis debe consultar este índice primero. Si el dominio necesario no está cub
 | `security_auditor` | `agentes/security_auditor/` | Guardián de Integridad y Privacidad — audita superficie de ataque del enjambre (OWASP, prompt injection, secrets, OAuth tokens, .gitignore). Solo lee, nunca modifica. Routing P2P a python_developer, git_expert, n8n_engineer, email_manager. Hallazgos CRÍTICOS escalan directo a Thomas. |
 | `tester_automation` | `agentes/tester_automation/` | Jefe de Calidad y Robustez — escribe Pytest (Python) y Jest/Vitest (React) tests, crea mocks de recibos con errores típicos, audita cobertura. Regla: código sin test file es falla C2. Tests en tests/. P2P con python_developer, frontend_engineer, data_scientist. |
 | `ux_designer` | `agentes/ux_designer/` | Arquitecto de Experiencia y Flujos de Trabajo — diseña wireframes (texto estructurado), arquitectura de información y handoff specs antes de que frontend_engineer toque código. Progressive disclosure: Nivel 1 (4 KPIs), Nivel 2 (tabs), Nivel 3 (drill-down). Regla de 5 segundos para Jeff. |
+| `api_backend` | `agentes/api_backend/` | Arquitecto de Servicios y Conectividad — diseña e implementa la capa FastAPI entre motor OCR Python y dashboard React. OpenAPI 3.1, Bearer Token JWT, contratos JSON para los 17 KPIs, manejo de errores sin stack traces expuestos. |
+| `compliance` | `agentes/compliance/` | Especialista Normativa Fiscal DIAN/IRS — valida CUFE, NIT, IVA en facturas colombianas y mapea categorías de gasto a IRS Schedule C para deducibilidad de Jeff Bania. Regla de oro DIAN: sin CUFE no hay factura válida. |
+| `demo_expert` | `agentes/demo_expert/` | Maestro de Narrativa y Product Showcase — traduce capacidades técnicas del enjambre a valor de negocio comprensible para Jeff. Walkthroughs, ROI narratives, pitch emails bilingües. Regla del Número Único: un impacto por comunicación. |
 
 ---
 

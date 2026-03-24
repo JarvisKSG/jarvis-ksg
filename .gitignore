@@ -1,0 +1,51 @@
+# === CREDENTIALS & SECRETS ===
+.env
+*.json
+!protocols/*.json
+# Gmail OAuth tokens and client secrets
+agentes/email_manager/tools/jarvis_token.json
+agentes/email_manager/tools/client_secret*.json
+tools/jarvis_token.json
+tools/client_secret*.json
+
+# === SENSITIVE BUSINESS DATA ===
+# Historical memory and knowledge base (internal context)
+memory/
+
+# Financial files
+*.xlsx
+*.xls
+*.csv
+agentes/contador/02_Archivos_Procesados/
+
+# Real emails and documents
+agentes/email_manager/inbox/
+agentes/email_manager/drafts/
+projects/*/facturas/
+projects/*/recibos/
+
+# === PYTHON ===
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+env/
+
+# === OS & EDITOR ===
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# === LOGS ===
+logs/
+*.log

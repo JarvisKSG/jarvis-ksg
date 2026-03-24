@@ -130,7 +130,7 @@ Matar siempre por PID usando `netstat -ano | grep 5001`.
 Python 3.12 → /c/Python312/python.exe
 Flask → servidor web en localhost:5001
 ChromaDB → búsqueda vectorial local (chroma_db/)
-Gemini API (paid) → AIzaSyA4pjEJKl59n98asW-XwcfWHf-U2n7iujc
+Gemini API (paid) → ver GEMINI_API_KEY en .env
   - Embeddings: gemini-embedding-001
   - Generación: gemini-2.5-flash
 ```

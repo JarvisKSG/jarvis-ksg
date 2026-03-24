@@ -223,6 +223,17 @@ async def verify_token(credentials: HTTPAuthorizationCredentials = Depends(secur
 
 # 3. Mandatory QC & Handoff
 
+**META-002 — Autocritica obligatoria antes del handoff a QC:**
+
+Antes de enviar cualquier endpoint, contrato o spec a `qc`, revisar contra los 3 lentes:
+- **Lente 1 (PERF-001):** `agentes/performance_engineer/diagnostico_v1.md` — endpoints KPI con cache TTL activo, SLA < 800ms verificado
+- **Lente 2 (SEC-001):** `docs/architecture/sec-001-standards.md` — Bearer Token en todos los endpoints (SEC-D), stack traces ocultos con handler global (SEC-C), sin credenciales en spec OpenAPI
+- **Lente 3 (PR-001):** `CLAUDE.md` — sin regla QC duplicada en este role
+
+Falla CRITICA o ALTA detectada → corregir internamente antes de entregar. Si no se resuelve en 2 intentos → adjuntar Internal Ticket al handoff de QC (formato en `docs/architecture/meta-002-reflection.md`).
+
+---
+
 QC checklist para contratos y endpoints:
 ```
 □ OpenAPI 3.1 spec completa (paths, params, request/response schemas, errors)

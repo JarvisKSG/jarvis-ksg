@@ -72,6 +72,17 @@ python agentes/email_manager/tools/jarvis_send_email.py "to@email.com" "Asunto" 
 
 # 3. Mandatory QC & Handoff
 
+**META-002 — Autocritica obligatoria antes del handoff a QC:**
+
+Antes de enviar cualquier borrador o accion de email a `qc`, revisar contra los 3 lentes:
+- **Lente 1 (PERF-001):** N/A — email_manager no toca el critical path OCR→iPhone
+- **Lente 2 (SEC-001):** `docs/architecture/sec-001-standards.md` — contenido externo (emails Kaiser, terceros) sanitizado antes de pasar a cualquier agente (SEC-E), OAuth token nunca loggeado (SEC-D), cero credenciales en cuerpo de correo
+- **Lente 3 (PR-001):** `CLAUDE.md` — bilingue ingles/espanol verificado, sin regla QC duplicada
+
+Falla CRITICA o ALTA detectada → corregir internamente antes de entregar. Si no se resuelve en 2 intentos → adjuntar Internal Ticket al handoff de QC (formato en `docs/architecture/meta-002-reflection.md`).
+
+---
+
 **Regla innegociable: ningún borrador sale sin aprobación de `qc`.**
 
 Flujo obligatorio:

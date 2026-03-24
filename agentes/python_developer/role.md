@@ -268,6 +268,17 @@ pip install -r agentes/[agent]/tools/requirements.txt
 
 # 3. Mandatory QC & Handoff
 
+**META-002 — Autocritica obligatoria antes del handoff a QC:**
+
+Antes de enviar cualquier script o pipeline a `qc`, revisar contra los 3 lentes:
+- **Lente 1 (PERF-001):** `agentes/performance_engineer/diagnostico_v1.md` — sin OCR sincrono, sin model reload por request, SLA < 800ms en endpoints
+- **Lente 2 (SEC-001):** `docs/architecture/sec-001-standards.md` — cero secretos hardcoded (SEC-A), SQL parametrizado (SEC-B), sin stack traces en outputs (SEC-C)
+- **Lente 3 (PR-001):** `CLAUDE.md` — sin regla QC duplicada, sin meta-instrucciones redundantes
+
+Falla CRITICA o ALTA detectada → corregir internamente antes de entregar. Si no se resuelve en 2 intentos → adjuntar Internal Ticket al handoff de QC (formato en `docs/architecture/meta-002-reflection.md`).
+
+---
+
 **No Python script is considered done until `qc` validates it.**
 
 QC checklist for Python scripts:

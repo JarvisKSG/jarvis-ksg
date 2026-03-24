@@ -213,8 +213,8 @@ Util para auditorias retroactivas de codigo ya en produccion.
 
 | Fase | Descripcion | Estado |
 |------|-------------|--------|
-| META-002 v1 (hoy) | Protocolo definido, activacion manual por Jarvis, Internal Ticket manual | EN DESARROLLO |
-| META-002 v2 | Instruccion integrada en role.md de 5 agentes criticos (python_developer, api_backend, frontend_engineer, email_manager, n8n_engineer) | **DESBLOQUEADO** — SEC-001 activo, Amendment Pipeline listo |
+| META-002 v1 | Protocolo definido, activacion manual por Jarvis, Internal Ticket manual | COMPLETADO |
+| META-002 v2 | Instruccion integrada en role.md de 5 agentes criticos (python_developer, api_backend, frontend_engineer, email_manager, n8n_engineer) | **ACTIVO** — Amendment Pipeline ejecutado 2026-03-24 |
 | META-002 v3 | `reflection_metrics` en `agent_performance.json` para todos los agentes — dashboard de filtration rate | Pendiente META-003 |
 | META-003 | Los tickets resueltos internamente alimentan `shared_knowledge.json` — el aprendizaje de un agente se comparte automaticamente | Pendiente META-002 v2 estable |
 

@@ -15,6 +15,7 @@ Jarvis debe consultar este índice primero. Si el dominio necesario no está cub
 | `n8n_engineer` | `agentes/n8n_engineer/` | Automatización n8n — diseña y construye workflows, integra APIs REST, maneja webhooks, transforma JSON y sincroniza datos entre sistemas. |
 | `slack_expert` | `agentes/slack_expert/` | Integración Slack — desarrolla bots, Block Kit UIs, slash commands, event handlers y OAuth flows para el workspace Keystone. Todo mensaje pasa por `qc` antes de enviarse. |
 | `git_expert` | `agentes/git_expert/` | Control de versiones y custodio de repos — branching, commits convencionales, resolución de conflictos, rebase, releases/tags y auditoría permanente del .gitignore. Operaciones destructivas requieren QC. |
+| `python_developer` | `agentes/python_developer/` | Backend Python y procesamiento de datos — scripts de automatización, OCR, extracción de datos, Pandas/JSON, integraciones API. Todo script requiere QC antes de entregarse. |
 
 ---
 

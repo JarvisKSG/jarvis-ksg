@@ -1,0 +1,14 @@
+# requirements.txt — extractor_recibos.py
+# Generated: 2026-03-23
+# Install: pip install -r agentes/python_developer/tools/requirements.txt
+#
+# System prerequisite (NOT a pip package):
+#   Tesseract OCR binary must be installed separately.
+#   Windows: https://github.com/UB-Mannheim/tesseract/wiki
+#   Ubuntu:  sudo apt install tesseract-ocr tesseract-ocr-spa
+#   macOS:   brew install tesseract tesseract-lang
+#   Set TESSERACT_CMD env var if tesseract is not on PATH.
+#   Set TESSERACT_LANG env var to change language (default: spa+eng).
+
+Pillow==10.3.0
+pytesseract==0.3.13

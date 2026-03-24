@@ -27,7 +27,7 @@ _BASE             = os.path.dirname(os.path.abspath(__file__))
 CHROMA_DIR        = os.path.join(_BASE, "chroma_db")
 FICHAS_DIR        = os.path.join(_BASE, "fichas_tecnicas")
 CATALOG_PATH      = os.path.join(_BASE, "product_catalog.json")
-SEND_EMAIL_SCRIPT = os.path.normpath(os.path.join(_BASE, "..", "..", "agents", "contador", "jarvis_send_email.py"))
+SEND_EMAIL_SCRIPT = os.path.normpath(os.path.join(_BASE, "..", "..", "..", "agentes", "email_manager", "tools", "jarvis_send_email.py"))
 TOP_K         = 6
 MAX_FULL_DOCS = 3
 

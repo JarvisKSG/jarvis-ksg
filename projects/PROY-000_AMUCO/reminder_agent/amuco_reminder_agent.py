@@ -269,7 +269,7 @@ def send_email_via_jarvis(to: str, subject: str, body: str, cc: str = None) -> b
     """Envia email usando el script de Jarvis Gmail API."""
     script_path = os.path.join(
         os.path.dirname(__file__),
-        "../../agents/2A-CONTADOR/jarvis_send_email.py"
+        "../../agentes/email_manager/tools/jarvis_send_email.py"
     )
     script_path = os.path.normpath(script_path)
 
@@ -278,7 +278,8 @@ def send_email_via_jarvis(to: str, subject: str, body: str, cc: str = None) -> b
         return False
 
     import subprocess
-    cmd = ["python", script_path, to, subject, body]
+    python_exe = r"C:\Python312\python.exe"
+    cmd = [python_exe, script_path, to, subject, body]
     if cc:
         cmd.append(cc)
 

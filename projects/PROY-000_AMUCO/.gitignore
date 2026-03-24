@@ -40,3 +40,6 @@ desktop.ini
 
 # ── Logs operativos (se generan en runtime) ───────────────
 reminder_agent/sent_log.json
+
+# ── Google Drive OAuth token (se regenera con drive_auth.py) ──
+_utils/amuco_drive_token.json

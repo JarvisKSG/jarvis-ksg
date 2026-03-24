@@ -41,6 +41,12 @@ Jarvis debe consultar este índice primero. Si el dominio necesario no está cub
 
 ## Agentes Planificados (por crear)
 
+### Reserva Estrategica — ADN extraido, pendiente activacion
+
+| Nombre | Dominio | Prioridad | ADN Fuente | Dependencias | Estado |
+|--------|---------|-----------|------------|--------------|--------|
+| `reinforcement_learning_engineer` | RL para optimizacion de estimaciones — reward/state/action sobre margen de error en licitaciones | FUTURA | `VoltAgent/awesome-claude-code-subagents/categories/05-data-ai/reinforcement-learning-engineer.md` | `data_scientist`, `estimation_specialist` | ADN extraido — Pendiente activacion |
+
 ### Sprint 3 — Alta/Critica
 
 | Nombre | Dominio | Prioridad | ADN Fuente | Dependencias | Estado |

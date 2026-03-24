@@ -34,6 +34,7 @@ Jarvis debe consultar este índice primero. Si el dominio necesario no está cub
 | `estimation_specialist` | `agentes/estimation_specialist/` | Analista Senior de Costos y Predictor de Presupuestos — genera matrices de costos unitarios desde Caja Negra, modelos de regresion de precios, y presupuestos con margen de error para licitaciones. Colabora con data_scientist y researcher_agent. |
 | `mobile_pwa` | `agentes/mobile_pwa/` | Experto en Progressive Web Apps y Portabilidad Movil — transforma el dashboard Keystone en PWA instalable para Jeff (Lighthouse 100/100), Service Workers con cache offline para KPIs Nivel 1 en Finca Barbosa, y reglas de adaptacion de los 17 KPIs a iPhone. |
 | `recovery_specialist` | `agentes/recovery_specialist/` | Guardian de Resiliencia y Especialista en Recuperacion de Desastres — backups diarios cifrados AES-256-GCM de Caja Negra y PostgreSQL, checksum SHA-256 obligatorio, alertas Slack autonomas ante fallo, y plan de recuperacion < 15 minutos. Prioridad CRITICA. |
+| `performance_engineer` | `agentes/performance_engineer/` | Guardian de los Milisegundos — profiling del Critical Path OCR→iPhone, SLA 800ms en localhost, deteccion de cuellos de botella CPU/I/O-bound, auditorias de queries Caja Negra, y recomendaciones de optimizacion para python_developer, api_backend y frontend_engineer. |
 
 ---
 

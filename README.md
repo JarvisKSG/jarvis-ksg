@@ -5,62 +5,95 @@ Jarvis is an AI orchestration system coordinating **21 specialist agents** acros
 
 ```mermaid
 graph TD
-    J([Jarvis\nOrquestador]) --> QC{{qc}}
+    J([Jarvis]) --> QC{{qc}}
 
-    subgraph Finanzas["💰 Finanzas"]
+    subgraph Finanzas
         CO[contador]
         DS[data_scientist]
         CP[compliance]
     end
 
-    subgraph Desarrollo["⚙️ Desarrollo"]
+    subgraph Desarrollo
         PY[python_developer]
         FE[frontend_engineer]
         AB[api_backend]
         DB[database_architect]
     end
 
-    subgraph Infraestructura["🔧 Infraestructura"]
+    subgraph Infraestructura
         GE[git_expert]
         N8N[n8n_engineer]
         TA[tester_automation]
         SA[security_auditor]
     end
 
-    subgraph Inteligencia["🧠 Inteligencia"]
+    subgraph Inteligencia
         AI[ai_engineer]
         RA[researcher_agent]
         EI[entity_intelligence]
     end
 
-    subgraph Producto["🎯 Producto"]
+    subgraph Producto
         SM[scrum_master]
         UX[ux_designer]
         DE[demo_expert]
         TW[tech_writer]
     end
 
-    subgraph Comunicacion["📡 Comunicación"]
+    subgraph Comunicacion
         EM[email_manager]
         SL[slack_expert]
     end
 
-    J --> CO & DS & CP & PY & FE & AB & DB
-    J --> GE & N8N & TA & SA
-    J --> AI & RA & EI
-    J --> SM & UX & DE & TW
-    J --> EM & SL
+    J --> CO
+    J --> DS
+    J --> CP
+    J --> PY
+    J --> FE
+    J --> AB
+    J --> DB
+    J --> GE
+    J --> N8N
+    J --> TA
+    J --> SA
+    J --> AI
+    J --> RA
+    J --> EI
+    J --> SM
+    J --> UX
+    J --> DE
+    J --> TW
+    J --> EM
+    J --> SL
 
-    CO & DS & CP & PY & FE & AB & DB --> QC
-    GE & N8N & TA & SA --> QC
-    AI & RA & EI --> QC
-    SM & UX & DE & TW --> QC
-    EM & SL --> QC
+    CO --> QC
+    DS --> QC
+    CP --> QC
+    PY --> QC
+    FE --> QC
+    AB --> QC
+    DB --> QC
+    GE --> QC
+    N8N --> QC
+    TA --> QC
+    SA --> QC
+    AI --> QC
+    RA --> QC
+    EI --> QC
+    SM --> QC
+    UX --> QC
+    DE --> QC
+    TW --> QC
+    EM --> QC
+    SL --> QC
 
     PY <--> AB
     AB <--> FE
     DS <--> UX
-    AI -.->|Amendment Pipeline| CO & PY & FE & DB
+    AI -.->|Amendment Pipeline| CO
+    AI -.->|Amendment Pipeline| PY
+    AI -.->|Amendment Pipeline| FE
+    AI -.->|Amendment Pipeline| DB
 ```
 
 ---

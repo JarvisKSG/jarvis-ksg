@@ -35,6 +35,7 @@ Jarvis debe consultar este índice primero. Si el dominio necesario no está cub
 | `mobile_pwa` | `agentes/mobile_pwa/` | Experto en Progressive Web Apps y Portabilidad Movil — transforma el dashboard Keystone en PWA instalable para Jeff (Lighthouse 100/100), Service Workers con cache offline para KPIs Nivel 1 en Finca Barbosa, y reglas de adaptacion de los 17 KPIs a iPhone. |
 | `recovery_specialist` | `agentes/recovery_specialist/` | Guardian de Resiliencia y Especialista en Recuperacion de Desastres — backups diarios cifrados AES-256-GCM de Caja Negra y PostgreSQL, checksum SHA-256 obligatorio, alertas Slack autonomas ante fallo, y plan de recuperacion < 15 minutos. Prioridad CRITICA. |
 | `performance_engineer` | `agentes/performance_engineer/` | Guardian de los Milisegundos — profiling del Critical Path OCR→iPhone, SLA 800ms en localhost, deteccion de cuellos de botella CPU/I/O-bound, auditorias de queries Caja Negra, y recomendaciones de optimizacion para python_developer, api_backend y frontend_engineer. |
+| `localization_expert` | `agentes/localization_expert/` | Experto en Localizacion y Paridad Cultural Colombia↔USA — dual currency COP/USD con TRM diaria del Banco de la Republica, conversion Imperial/Metrico obligatoria para el proyecto Deck, y auditoria de tono ingles profesional (firma de ingenieria USA) en comunicaciones a Jeff. Post-procesador obligatorio antes de QC en reportes externos. |
 
 ---
 

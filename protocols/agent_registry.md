@@ -12,6 +12,9 @@ Jarvis debe consultar este índice primero. Si el dominio necesario no está cub
 | `qc` | `agentes/qc/` | Control de Calidad — valida C1–C7 todo output antes de llegar a Thomas o Jeff. Invocar siempre al final de cualquier equipo. |
 | `contador` | `agentes/contador/` | Contabilidad y procesamiento financiero — extrae campos de recibos/facturas, genera reportes estructurados, registra en Caja Negra. |
 | `email_manager` | `agentes/email_manager/` | Gestión de correos Gmail — único agente autorizado para leer bandeja, redactar y enviar correos. Todo borrador pasa por `qc` antes de envío. |
+| `n8n_engineer` | `agentes/n8n_engineer/` | Automatización n8n — diseña y construye workflows, integra APIs REST, maneja webhooks, transforma JSON y sincroniza datos entre sistemas. |
+| `slack_expert` | `agentes/slack_expert/` | Integración Slack — desarrolla bots, Block Kit UIs, slash commands, event handlers y OAuth flows para el workspace Keystone. Todo mensaje pasa por `qc` antes de enviarse. |
+| `git_expert` | `agentes/git_expert/` | Control de versiones y custodio de repos — branching, commits convencionales, resolución de conflictos, rebase, releases/tags y auditoría permanente del .gitignore. Operaciones destructivas requieren QC. |
 
 ---
 

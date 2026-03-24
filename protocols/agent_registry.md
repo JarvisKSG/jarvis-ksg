@@ -18,6 +18,7 @@ Jarvis debe consultar este índice primero. Si el dominio necesario no está cub
 | `python_developer` | `agentes/python_developer/` | Backend Python y procesamiento de datos — scripts de automatización, OCR, extracción de datos, Pandas/JSON, integraciones API. Todo script requiere QC antes de entregarse. |
 | `database_architect` | `agentes/database_architect/` | Arquitectura de datos — modelado relacional (3FN), optimización de queries, schemas para PostgreSQL/Airtable/Google Sheets, DDL con migraciones. Todo DDL requiere QC. |
 | `tech_writer` | `agentes/tech_writer/` | Documentación y gestión del conocimiento — guías de agentes, diagramas Mermaid, changelogs, onboarding. Lee todos los role.md y protocols/ para mantener docs sincronizados. |
+| `frontend_engineer` | `agentes/frontend_engineer/` | Arquitectura de interfaces y UX — React 18+/Next.js 14+, Tailwind CSS (obligatorio), dashboards Caja Negra, UI de procesamiento OCR de recibos, consumo de APIs. Todo componente requiere QC antes de deployar. |
 
 ---
 

@@ -20,6 +20,7 @@ Jarvis debe consultar este índice primero. Si el dominio necesario no está cub
 | `tech_writer` | `agentes/tech_writer/` | Documentación y gestión del conocimiento — guías de agentes, diagramas Mermaid, changelogs, onboarding. Lee todos los role.md y protocols/ para mantener docs sincronizados. |
 | `frontend_engineer` | `agentes/frontend_engineer/` | Arquitectura de interfaces y UX — React 18+/Next.js 14+, Tailwind CSS (obligatorio), dashboards Caja Negra, UI de procesamiento OCR de recibos, consumo de APIs. Todo componente requiere QC antes de deployar. |
 | `ai_engineer` | `agentes/ai_engineer/` | Arquitecto de inteligencia y optimizador LLM — auditorías semanales de prompts, control de costos y tokens, arquitectura RAG, selección de modelos, y Amendment Pipeline para evolución del enjambre. **Único agente autorizado a proponer cambios en role.md de otros agentes** (siempre vía QC + aprobación Thomas). Evolution Zone abierta (Opt-In). |
+| `scrum_master` | `agentes/scrum_master/` | Director de Proyectos y Gestor de Producto — mantiene `memory/backlog.md` como fuente de verdad, prioriza por Impacto/Dificultad, planifica sprints semanales, registra ideas de Thomas, trackea hallazgos de auditoría y hitos de despliegue. |
 
 ---
 

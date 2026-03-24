@@ -31,6 +31,8 @@ Jarvis debe consultar este índice primero. Si el dominio necesario no está cub
 | `compliance` | `agentes/compliance/` | Especialista Normativa Fiscal DIAN/IRS — valida CUFE, NIT, IVA en facturas colombianas y mapea categorías de gasto a IRS Schedule C para deducibilidad de Jeff Bania. Regla de oro DIAN: sin CUFE no hay factura válida. |
 | `demo_expert` | `agentes/demo_expert/` | Maestro de Narrativa y Product Showcase — traduce capacidades técnicas del enjambre a valor de negocio comprensible para Jeff. Walkthroughs, ROI narratives, pitch emails bilingües. Regla del Número Único: un impacto por comunicación. |
 
+| `estimation_specialist` | `agentes/estimation_specialist/` | Analista Senior de Costos y Predictor de Presupuestos — genera matrices de costos unitarios desde Caja Negra, modelos de regresion de precios, y presupuestos con margen de error para licitaciones. Colabora con data_scientist y researcher_agent. |
+
 ---
 
 ## Agentes Planificados (por crear)

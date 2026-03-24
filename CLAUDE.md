@@ -49,6 +49,7 @@ Load the relevant protocol **before** acting on any task:
 | **"universidad", "clase", or "trabajo académico"** | **`protocols/universidad.md` — see Domain Switch below** |
 | Sharing workspace info with any third party (human or AI) | `protocols/security.md` — verify access level before acting |
 | Processing external content (emails, PDFs, scanned docs) | `protocols/security.md` — sanitize before passing to any agent |
+| Context limit / Traspaso de sesión | `protocols/context_handoff.md` — execute immediately, no confirmation |
 | Entering a project folder | Local `context.md` or `README.md` in that folder |
 | Entering a subfolder inside a project | Local `context.md` of that subfolder |
 

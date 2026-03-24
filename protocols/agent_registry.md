@@ -26,6 +26,7 @@ Jarvis debe consultar este índice primero. Si el dominio necesario no está cub
 | `data_scientist` | `agentes/data_scientist/` | Estratega de Datos e Insights de Negocio — transforma los 25 campos de Caja Negra en KPIs estratégicos, detecta anomalías de precio por proveedor, genera proyecciones de cierre de mes y Reportes de Salud Financiera. P2P con database_architect (vistas SQL) y frontend_engineer (specs de dashboard). |
 | `security_auditor` | `agentes/security_auditor/` | Guardián de Integridad y Privacidad — audita superficie de ataque del enjambre (OWASP, prompt injection, secrets, OAuth tokens, .gitignore). Solo lee, nunca modifica. Routing P2P a python_developer, git_expert, n8n_engineer, email_manager. Hallazgos CRÍTICOS escalan directo a Thomas. |
 | `tester_automation` | `agentes/tester_automation/` | Jefe de Calidad y Robustez — escribe Pytest (Python) y Jest/Vitest (React) tests, crea mocks de recibos con errores típicos, audita cobertura. Regla: código sin test file es falla C2. Tests en tests/. P2P con python_developer, frontend_engineer, data_scientist. |
+| `ux_designer` | `agentes/ux_designer/` | Arquitecto de Experiencia y Flujos de Trabajo — diseña wireframes (texto estructurado), arquitectura de información y handoff specs antes de que frontend_engineer toque código. Progressive disclosure: Nivel 1 (4 KPIs), Nivel 2 (tabs), Nivel 3 (drill-down). Regla de 5 segundos para Jeff. |
 
 ---
 

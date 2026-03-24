@@ -1,0 +1,327 @@
+{
+  "name": "Inventario-Barbosa",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "inventario-barbosa",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "node_webhook_trigger",
+      "name": "Webhook — Recibir Payload",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [200, 400],
+      "webhookId": "inventario-barbosa-proy001"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "cond_fecha",
+              "leftValue": "={{ $json.body.fecha }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty"
+              }
+            },
+            {
+              "id": "cond_proyecto",
+              "leftValue": "={{ $json.body.proyecto }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty"
+              }
+            },
+            {
+              "id": "cond_materiales",
+              "leftValue": "={{ Array.isArray($json.body.materiales) && $json.body.materiales.length > 0 }}",
+              "rightValue": "true",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "node_validate_payload",
+      "name": "Validar Payload",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [440, 400]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Transformar materiales: aplanar array y calcular total_cop\nconst body = $input.first().json.body;\n\nconst fecha = body.fecha;\nconst proyecto = body.proyecto;\nconst reportado_por = body.reportado_por || 'Desconocido';\nconst timestamp_sync = new Date().toISOString();\n\nif (!Array.isArray(body.materiales) || body.materiales.length === 0) {\n  throw new Error('El campo materiales esta ausente o vacio');\n}\n\nconst rows = body.materiales.map((mat, idx) => {\n  const nombre = mat.nombre;\n  const cantidad = Number(mat.cantidad);\n  const unidad = mat.unidad;\n  const costo_unitario = Number(mat.costo_unitario);\n\n  if (!nombre || isNaN(cantidad) || !unidad || isNaN(costo_unitario)) {\n    throw new Error(`Material en indice ${idx} tiene campos invalidos: ${JSON.stringify(mat)}`);\n  }\n\n  const total_cop = cantidad * costo_unitario;\n\n  return {\n    json: {\n      fecha,\n      proyecto,\n      nombre,\n      cantidad,\n      unidad,\n      costo_unitario,\n      total_cop,\n      reportado_por,\n      timestamp_sync\n    }\n  };\n});\n\nreturn rows;\n"
+      },
+      "id": "node_transform_materiales",
+      "name": "Transformar Materiales",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [680, 280]
+    },
+    {
+      "parameters": {
+        "batchSize": 10,
+        "options": {}
+      },
+      "id": "node_split_batches",
+      "name": "Split In Batches",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [920, 280]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $vars.SHEETS_DOC_ID }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Inventario_Materiales",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "fecha": "={{ $json.fecha }}",
+            "proyecto": "={{ $json.proyecto }}",
+            "nombre": "={{ $json.nombre }}",
+            "cantidad": "={{ $json.cantidad }}",
+            "unidad": "={{ $json.unidad }}",
+            "costo_unitario": "={{ $json.costo_unitario }}",
+            "total_cop": "={{ $json.total_cop }}",
+            "reportado_por": "={{ $json.reportado_por }}",
+            "timestamp_sync": "={{ $json.timestamp_sync }}"
+          }
+        },
+        "options": {}
+      },
+      "id": "node_append_sheets",
+      "name": "Append a Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [1160, 280],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REPLACE_WITH_CREDENTIAL_ID",
+          "name": "Keystone Google Sheets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Construir respuesta estructurada de exito\nconst allItems = $input.all();\nconst records_processed = allItems.length;\nconst timestamp = new Date().toISOString();\n\nreturn [\n  {\n    json: {\n      status: 'ok',\n      records_processed,\n      timestamp\n    }\n  }\n];\n"
+      },
+      "id": "node_build_response",
+      "name": "Construir Respuesta OK",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1400, 280]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Payload invalido — construir respuesta de error 400\nconst timestamp = new Date().toISOString();\n\nreturn [\n  {\n    json: {\n      status: 'error',\n      message: 'Payload invalido. Se requieren: fecha (string), proyecto (string), materiales (array no vacio).',\n      timestamp\n    }\n  }\n];\n"
+      },
+      "id": "node_invalid_payload_response",
+      "name": "Respuesta Error Validacion",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [680, 540]
+    },
+    {
+      "parameters": {},
+      "id": "node_error_trigger",
+      "name": "Error Trigger",
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [200, 760]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Formatear alerta de error segun estandar Keystone\nconst error = $input.first().json;\n\nconst workflowName = error.workflow?.name || 'Inventario-Barbosa';\nconst nodeName = error.execution?.lastNodeExecuted || 'Desconocido';\nconst message = error.execution?.error?.message || 'Sin mensaje de error';\nconst timestamp = new Date().toISOString();\n\nconst alertMessage = `[n8n ERROR] Workflow: ${workflowName} | Node: ${nodeName} | Message: ${message} | Time: ${timestamp}`;\n\nreturn [\n  {\n    json: {\n      alert: alertMessage,\n      workflow: workflowName,\n      node: nodeName,\n      message,\n      timestamp,\n      to: 'thomasreyesr@gmail.com',\n      subject: `[n8n ERROR] Inventario-Barbosa — ${nodeName}`\n    }\n  }\n];\n"
+      },
+      "id": "node_format_error_alert",
+      "name": "Formatear Alerta de Error",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [440, 760]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.jarvis.keystone.internal/notify",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "to",
+              "value": "={{ $json.to }}"
+            },
+            {
+              "name": "subject",
+              "value": "={{ $json.subject }}"
+            },
+            {
+              "name": "body",
+              "value": "={{ $json.alert }}"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      },
+      "id": "node_notify_error",
+      "name": "Notificar Error a Thomas",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [680, 760],
+      "notes": "Reemplazar URL con el endpoint real del email_manager agent (jarvis_send_email.py) o configurar un nodo Gmail con credencial Jarvis."
+    },
+    {
+      "parameters": {
+        "content": "## Workflow: Inventario-Barbosa\n**PROY-001 — Finca Barbosa**\n\nWebhook URL (produccion):\n`POST https://<tu-n8n-host>/webhook/inventario-barbosa`\n\nWebhook URL (test):\n`POST https://<tu-n8n-host>/webhook-test/inventario-barbosa`\n\n**Flujo principal:**\n1. Webhook recibe payload diario\n2. IF valida: fecha, proyecto, materiales presentes y no vacios\n3. Code node aplana array materiales, calcula total_cop\n4. Split in Batches (max 10) → Append a Google Sheets\n5. Respuesta estructurada: { status, records_processed, timestamp }\n\n**Rama error:**\nError Trigger → Formatear alerta → Notificar a Thomas\n\n**Credenciales necesarias:**\n- Google Sheets OAuth2: `Keystone Google Sheets`\n- Variable: `SHEETS_DOC_ID` = ID del spreadsheet destino\n\n**Hoja destino:** `Inventario_Materiales`\nColumnas: fecha | proyecto | nombre | cantidad | unidad | costo_unitario | total_cop | reportado_por | timestamp_sync",
+        "height": 420,
+        "width": 520,
+        "color": 7
+      },
+      "id": "node_sticky_note",
+      "name": "Sticky Note — Documentacion",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [200, 60]
+    }
+  ],
+  "connections": {
+    "Webhook — Recibir Payload": {
+      "main": [
+        [
+          {
+            "node": "Validar Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validar Payload": {
+      "main": [
+        [
+          {
+            "node": "Transformar Materiales",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respuesta Error Validacion",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Transformar Materiales": {
+      "main": [
+        [
+          {
+            "node": "Split In Batches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split In Batches": {
+      "main": [
+        [
+          {
+            "node": "Append a Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append a Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "Construir Respuesta OK",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Error Trigger": {
+      "main": [
+        [
+          {
+            "node": "Formatear Alerta de Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Formatear Alerta de Error": {
+      "main": [
+        [
+          {
+            "node": "Notificar Error a Thomas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "saveExecutionProgress": true,
+    "saveDataErrorExecution": "all",
+    "saveDataSuccessExecution": "last",
+    "errorWorkflow": "",
+    "timezone": "America/Bogota"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2026-03-23T00:00:00.000Z",
+      "updatedAt": "2026-03-23T00:00:00.000Z",
+      "id": "tag_inventario_barbosa",
+      "name": "PROY-001"
+    },
+    {
+      "createdAt": "2026-03-23T00:00:00.000Z",
+      "updatedAt": "2026-03-23T00:00:00.000Z",
+      "id": "tag_inventario",
+      "name": "inventario"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2026-03-23T00:00:00.000Z",
+  "versionId": "1"
+}

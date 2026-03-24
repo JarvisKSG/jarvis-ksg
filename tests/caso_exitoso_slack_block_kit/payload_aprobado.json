@@ -1,0 +1,48 @@
+{
+  "channel": "inventario-barbosa",
+  "text": "✅ Sincronización exitosa — 12 registros procesados | Finca Barbosa | 23 mar 2026 a las 2:35 p.m.",
+  "blocks": [
+    {
+      "type": "header",
+      "text": {
+        "type": "plain_text",
+        "text": "📦 Reporte de Inventario — Finca Barbosa",
+        "emoji": true
+      }
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "*Generado:* <!date^1742758500^{date_short} a las {time}|23 mar 2026 a las 2:35 p.m.>\n*Agente:* Jarvis — Agente Inventario Keystone\n*Archivo:* `Barbosa_Farmhouse_Inventory_FULL_2026-03-21.xlsx`\n*Estado:* ✅ Procesado correctamente"
+      }
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "actions",
+      "elements": [
+        {
+          "type": "button",
+          "text": { "type": "plain_text", "text": "Ver Inventario Completo", "emoji": true },
+          "style": "primary",
+          "url": "REEMPLAZAR_CON_URL_REAL",
+          "action_id": "view_inventory"
+        },
+        {
+          "type": "button",
+          "text": { "type": "plain_text", "text": "Descargar XLSX", "emoji": true },
+          "url": "REEMPLAZAR_CON_URL_REAL",
+          "action_id": "download_xlsx"
+        }
+      ]
+    }
+  ],
+  "_notas_produccion": {
+    "timestamp": "1742758500 es estatico — en produccion usar Math.floor(Date.now()/1000)",
+    "channel": "Reemplazar nombre por Channel ID real (formato CXXXXXXXX)",
+    "urls": "Reemplazar REEMPLAZAR_CON_URL_REAL con endpoints reales",
+    "fallback_text": "Campo text ya incluye detalle de 12 registros para push notifications"
+  }
+}

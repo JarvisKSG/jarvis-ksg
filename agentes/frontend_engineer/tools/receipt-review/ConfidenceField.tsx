@@ -20,8 +20,9 @@ export default function ConfidenceField({
   fullWidth = false,
   children,
 }: ConfidenceFieldProps) {
+  // undefined = confidence unknown → treat as low confidence (amber by default)
   const isLowConfidence =
-    confidence !== undefined && confidence < LOW_CONFIDENCE_THRESHOLD;
+    confidence === undefined || confidence < LOW_CONFIDENCE_THRESHOLD;
 
   return (
     <div className={fullWidth ? 'sm:col-span-2' : ''}>

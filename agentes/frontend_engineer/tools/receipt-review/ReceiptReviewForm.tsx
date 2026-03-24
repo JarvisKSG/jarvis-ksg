@@ -43,6 +43,7 @@ export default function ReceiptReviewForm({
   confidence,
   onSave,
   imageUrl,
+  confianzaGlobal,
 }: ReceiptReviewFormProps) {
   const [state, dispatch] = useReducer(formReducer, initialData);
 
@@ -112,6 +113,23 @@ export default function ReceiptReviewForm({
         <h1 className="text-xl font-bold text-slate-100 mb-6">
           Revisión de Recibo / Receipt Review
         </h1>
+
+        {confianzaGlobal !== undefined && (
+          <div className="mb-4 flex items-center gap-2">
+            <span className="text-xs font-medium text-slate-500 uppercase tracking-wide">
+              Confianza OCR:
+            </span>
+            <span className={`text-sm font-semibold ${
+              confianzaGlobal >= 0.85
+                ? 'text-emerald-400'
+                : confianzaGlobal >= 0.70
+                ? 'text-amber-400'
+                : 'text-red-400'
+            }`}>
+              {Math.round(confianzaGlobal * 100)}%
+            </span>
+          </div>
+        )}
 
         {/* Split-screen layout */}
         <div className="flex flex-col lg:flex-row gap-6">

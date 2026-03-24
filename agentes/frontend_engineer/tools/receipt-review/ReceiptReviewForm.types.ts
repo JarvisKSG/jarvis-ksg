@@ -28,6 +28,7 @@ export interface ReceiptReviewFormProps {
   confidence: Partial<FieldConfidence>;
   onSave: (data: CajaNegraRow) => void;
   imageUrl?: string;
+  confianzaGlobal?: number;
 }
 
 // ---------- Reducer ----------
@@ -57,3 +58,21 @@ export const DIVISA_OPTIONS: string[] = ['COP', 'USD', 'EUR'];
 export const PROYECTO_OPTIONS: string[] = [
   'PROY-001', 'PROY-002', 'PROY-003', 'PROY-004', 'PROY-005', 'PROY-006',
 ];
+
+// ReciboExtraido — canonical OCR extractor output schema
+// Produced by python_developer's extractor_recibos.py
+// AMENDED 2026-03-23: confianza scalar → confianza_global + confianza_campos
+export interface ReciboExtraido {
+  fecha: string
+  proveedor: string
+  nit?: string
+  concepto: string
+  subtotal: number
+  iva: number
+  total: number
+  divisa: string
+  metodo_pago?: string
+  confianza_global: number
+  confianza_campos: Partial<Record<keyof CajaNegraRow, number>>
+  archivo_origen: string
+}

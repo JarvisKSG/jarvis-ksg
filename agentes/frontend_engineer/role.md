@@ -195,30 +195,42 @@ const KPICard = ({ titulo, valor, delta, tendencia, categoria }: KPICardProps) =
 
 ## OCR Receipt UI Integration
 
-The `python_developer`'s `extractor_recibos.py` produces this JSON structure (coordinate to confirm current schema):
+<!-- AMENDED 2026-03-23 — ai_engineer C-01: split confianza scalar → confianza_global + confianza_campos -->
+<!-- Amendment proposal: agentes/ai_engineer/tools/proposals/20260323_frontend_engineer_confidence_model.md -->
+
+The `python_developer`'s `extractor_recibos.py` produces this JSON structure.
+**ALWAYS coordinate with `python_developer` to confirm the current schema before building the form.**
 
 ```typescript
+// Schema canónico — ver también memory/keystone_kb.md
 interface ReciboExtraido {
-  fecha: string           // "YYYY-MM-DD"
+  fecha: string              // "YYYY-MM-DD"
   proveedor: string
   nit?: string
   concepto: string
-  subtotal: number        // COP
-  iva: number             // COP
-  total: number           // COP
-  divisa: string          // "COP" | "USD"
+  subtotal: number           // COP
+  iva: number                // COP
+  total: number              // COP
+  divisa: string             // "COP" | "USD"
   metodo_pago?: string
-  confianza: number       // 0.0–1.0 — OCR confidence score
-  archivo_origen: string  // original file path
+  confianza_global: number   // 0.0–1.0 — score global del documento OCR (mostrar en header)
+  confianza_campos: Partial<Record<keyof CajaNegraRow, number>>
+                             // score por campo — usar para highlight granular amber
+                             // AUSENTE (undefined) = confianza desconocida → tratar como baja
+  archivo_origen: string     // original file path
 }
 ```
 
 **Receipt review UI rules:**
-1. Show confidence score prominently — fields with `confianza < 0.85` must be highlighted in amber
-2. All fields must be editable before submission (OCR is not perfect)
-3. Math validation in real time: `subtotal + iva === total` — show error if mismatch
-4. On submit → POST to `/api/recibos/registrar` → trigger `contador` agent to log in Caja Negra
-5. Confirmation screen shows the assigned `ID Único` (KSG-YYYY-NNNN format)
+1. Mostrar `confianza_global` en el header del formulario: e.g., badge "Confianza OCR: 87%"
+   — color: `text-emerald-400` si ≥ 0.85 | `text-amber-400` si 0.70–0.84 | `text-red-400` si < 0.70
+2. Highlight granular por campo: `confianza_campos[field] < 0.85` → `border-2 border-amber-400` + ⚠
+   — Si el campo NO tiene entrada en `confianza_campos` (undefined) → amber por defecto (confianza desconocida)
+   — `ConfidenceField.tsx` ya implementa esto: `undefined` confidence debe resolverse a amber
+3. All fields must be editable before submission (OCR is not perfect)
+4. Math validation in real time: `subtotal + iva === total` — show error if mismatch
+5. On submit → POST to `/api/recibos/registrar` → trigger `contador` agent to log in Caja Negra
+6. Confirmation screen shows the assigned `ID Único` (KSG-YYYY-NNNN format)
 
 ---
 

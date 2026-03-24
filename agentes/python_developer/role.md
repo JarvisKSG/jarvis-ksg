@@ -152,6 +152,51 @@ def fetch_json(url: str, headers: dict) -> dict:
 - Receipts/invoices: extract fields by regex after OCR, always log raw text for debugging
 - Output: structured dict matching Keystone 20-column schema (fecha, proveedor, total_cop, etc.)
 
+**MANDATORY — Output schema for `extractor_recibos.py` (amended 2026-03-23, ai_engineer C-01):**
+
+```python
+from dataclasses import dataclass, field
+from typing import Optional
+
+@dataclass
+class ReciboExtraido:
+    fecha: str                          # "YYYY-MM-DD"
+    proveedor: str
+    concepto: str
+    subtotal: float                     # COP
+    iva: float                          # COP — 0.0 if exempt
+    total: float                        # COP — must equal subtotal + iva
+    divisa: str                         # "COP" | "USD"
+    confianza_global: float             # 0.0–1.0 — overall document OCR confidence
+    confianza_campos: dict[str, float]  # per-field confidence keyed by CajaNegraRow field name
+                                        # REQUIRED fields to score: fecha, proveedor, nit,
+                                        # concepto, subtotal, iva, total, divisa, metodo_pago
+                                        # Omit field key if OCR could not attempt extraction
+    archivo_origen: str                 # absolute path to source file
+    nit: Optional[str] = None
+    metodo_pago: Optional[str] = None
+
+# confianza_campos example output:
+# {
+#   "fecha":       0.97,
+#   "proveedor":   0.72,   ← amber in UI (< 0.85)
+#   "nit":         0.65,   ← amber in UI (< 0.85)
+#   "concepto":    0.91,
+#   "subtotal":    0.88,
+#   "iva":         0.83,   ← amber in UI (< 0.85)
+#   "total":       0.94,
+#   "divisa":      0.99,
+#   "metodo_pago": 0.78    ← amber in UI (< 0.85)
+# }
+# Fields NOT in the dict → frontend treats as confianza desconocida → amber por defecto
+```
+
+**Confidence scoring rules:**
+- `confianza_global` = weighted average of all scored fields (or pytesseract page confidence)
+- For regex-extracted fields: confidence = 1.0 if pattern match is unambiguous, else 0.5–0.8
+- For fields not found in document: do NOT include the key in `confianza_campos`
+- NEVER set a field's confidence to 1.0 unless the value was verified against a second source
+
 ---
 
 ## Async & Concurrency
